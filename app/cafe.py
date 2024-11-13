@@ -1,5 +1,4 @@
-from datetime import datetime
-
+import datetime
 
 from app.errors import NotVaccinatedError
 from app.errors import OutdatedVaccineError
@@ -11,9 +10,7 @@ class Cafe:
         self.name = name
 
     def visit_cafe(self, visitor: dict) -> str:
-        try:
-            vaccine = visitor["vaccine"]
-        except KeyError:
+        if "vaccine" not in visitor:
             raise NotVaccinatedError(
                 "The date of your vaccine has expired. "
                 "Please, make a new vaccination"
